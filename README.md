@@ -66,7 +66,7 @@ npx skills add nulluna/cs-term-etymology
 
 ## 依赖
 
-- `exa-search` skill
+- [exa-search](https://github.com/nulluna/claude-context-dae-skills/tree/main/exa-search) skill
 
 推荐来源链路：
 
