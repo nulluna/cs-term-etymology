@@ -2,6 +2,14 @@
 
 一个面向**计算机术语解析与词源溯源**的开源 Claude/ChatGPT Skill。
 
+## 快速安装
+
+```bash
+npx skills add nulluna/cs-term-etymology
+```
+
+当前仓库按**单 skill 仓库**组织，根目录提供 `SKILL.md`，可直接按仓库安装。
+
 它不只是做“术语翻译”或“词典释义”，而是把一个计算机名词拆成四层能力来回答：
 
 1. **词源层**：这个词原来来自哪里，原义是什么，如何演变到今天的形式
@@ -110,18 +118,62 @@ cs-term-etymology/
 npx skills add nulluna/cs-term-etymology
 ```
 
-这更符合 `skills.sh` 的常见使用方式，也更适合面向公开仓库分发。
+这符合 `skills.sh` 的标准安装方式。对当前这种**单 skill 仓库**，核心要求是仓库可访问且根目录存在 `SKILL.md`。
 
 ## Release 发布建议
 
-为了适配 `skills.sh` 的标准，建议通过 GitHub Release 发布可安装产物。
+为了方便版本管理与公开分发，建议创建 Git tag 与 GitHub Release；但对 `skills.sh` 安装来说，**release 附件不是必需条件**。
 
-推荐在每个 release 中附带：
+推荐最小做法：
+
+1. 使用清晰的版本号打 tag，例如：`v0.1.0`
+2. 基于该 tag 创建 GitHub Release
+3. 在 release note 中简要说明本版本的新增、修正与兼容性变化
+
+如果你希望额外提供打包产物用于归档或镜像分发，也可以把下面文件作为可选附件上传：
 
 - `cs-term-etymology.skill`
 - `cs-term-etymology.zip`
 
-这样用户既可以直接通过仓库安装，也可以通过 release 产物进行分发与归档。
+但它们更适合作为补充产物，而不是 `skills.sh` 安装的前提。
+
+### release note 建议
+
+可采用下面这样的结构：
+
+- 本版本新增 / 调整了哪些能力
+- 是否调整了触发描述或 examples
+- 是否更新了参考资料或输出模板
+- 用户安装方式是否有变化
+
+### 面向 `skills.sh` 的分发说明
+
+如果仓库准备公开分发，建议同时满足：
+
+- 当前仓库保持单 skill 结构
+- 仓库根目录保留 `SKILL.md`
+- README 明确给出安装命令：`npx skills add nulluna/cs-term-etymology`
+- 通过 Git tag / GitHub Release 做版本发布
+
+这样对直接仓库安装、版本追踪和公开分发都更友好。
+
+### 版本命名建议
+
+建议采用语义化版本：
+
+- `v0.1.0`：首次可公开使用版本
+- `v0.1.1`：小修正，如文案、examples、references 更新
+- `v0.2.0`：新增明显能力，如增加 evals、增强触发描述、补充新术语领域示例
+
+### GitHub Actions 建议
+
+如果要自动化发布，最小 workflow 只需要：
+
+- 监听 `v*` tag push
+- 创建 GitHub Release
+- 可选上传 `.skill` / `.zip` 作为附件
+
+对于当前仓库，即使暂时不上传任何构建附件，也已经可以正常适配 `skills.sh` 的仓库安装方式。
 
 ## 示例
 
