@@ -102,14 +102,26 @@ cs-term-etymology/
     └── output-patterns.md
 ```
 
-## 安装 / 打包产物
+## 安装 / 发布
 
-当前已生成：
+推荐直接使用：
+
+```bash
+npx skills add nulluna/cs-term-etymology
+```
+
+这更符合 `skills.sh` 的常见使用方式，也更适合面向公开仓库分发。
+
+## Release 发布建议
+
+为了适配 `skills.sh` 的标准，建议通过 GitHub Release 发布可安装产物。
+
+推荐在每个 release 中附带：
 
 - `cs-term-etymology.skill`
 - `cs-term-etymology.zip`
 
-如果你在 Claude Code / Anthropic Agent Skills 体系中使用，可直接基于 skill 目录或 `.skill` 包安装。
+这样用户既可以直接通过仓库安装，也可以通过 release 产物进行分发与归档。
 
 ## 示例
 
