@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Collect optional release assets
+        run: |
+          mkdir -p dist
+
+          if [ -f "cs-term-etymology.skill" ]; then
+            cp "cs-term-etymology.skill" dist/
+          fi
+
+          if [ -f "cs-term-etymology.zip" ]; then
+            cp "cs-term-etymology.zip" dist/
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.skill
+            dist/*.zip
+          fail_on_unmatched_files: false
